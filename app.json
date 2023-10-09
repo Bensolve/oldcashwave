@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "newApp",
-    "slug": "newApp",
+    "name": "cashwave",
+    "slug": "cashwave",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
