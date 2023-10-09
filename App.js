@@ -7,18 +7,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 const App = () => {
-  const  userIsAuthenticated = true;
   return (
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          {userIsAuthenticated ? (
-              <Stack.Screen name="SignIn" component={SignInScreen}/>
-           
-          ) : (
-            <Stack.Screen name='SignUp' component={SignUpScreen}/>
-          )
-          }
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name='SignUp' component={SignUpScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
