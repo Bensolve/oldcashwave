@@ -1,14 +1,16 @@
 export const styles = {
+ 
   card:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'red',
   }
   ,
   container:{
     margin: 16,
     width: '80%',
-    backgroundColor: 'orange',
+    
   
   },
   Inputs: {
@@ -23,4 +25,5 @@ export const styles = {
   button: {
     width: '100%',
   },
-}
+};
+

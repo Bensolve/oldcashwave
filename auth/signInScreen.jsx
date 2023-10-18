@@ -1,20 +1,22 @@
-import { Button, Card, TextInput, useTheme } from 'react-native-paper';
-import { View, Text } from 'react-native';
+import { Button, Card, TextInput, } from 'react-native-paper';
+import { View, Text} from 'react-native';
 import * as React from 'react';
 import { styles } from './Sign';
 import { useNavigation } from '@react-navigation/native';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig'; // Adjust the import path based on your project structure
+
+
 
 const SignInScreen = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState(null); // Add state for error messages
   const [passwordVisible, setPasswordVisible] = React.useState(false);
-  const { colors } = useTheme();
   const navigation = useNavigation();
 
-//   const auth = getAuth();
+
+  
 
   const handleSignIn = async () => {
     try {
@@ -37,16 +39,17 @@ const SignInScreen = () => {
   };
 
   return (
-    <View style={styles.card}>
-      <Card style={styles.container}>
+    <View style={styles.card} >
+    
+    <Card style={styles.container}>
         <Card.Content>
           <Card.Cover source={require('../assets/images/logo.png')} resizeMode="stretch" />
-          <Card.Title>Sign In</Card.Title>
+          <Card.Title>Sign Up</Card.Title>
           <Card style={styles.Inputs}>
             <TextInput
               label="Email"
               style={styles.email}
-              theme={{ colors: { primary: colors.primary } }}
+          
               onChangeText={(text) => setEmail(text)}
             />
             <TextInput
@@ -56,11 +59,11 @@ const SignInScreen = () => {
               right={<TextInput.Icon icon = {passwordVisible ? icon='eye' : icon='eye-off'}
               onPress = {togglePasswordVisibility}  
              />}
-              theme={{ colors: { primary: colors.primary } }}
+              
               onChangeText={(text) => setPassword(text)}
               
             />
-
+     
           </Card>
           {errorMessage && (
             <Text style={styles.errorText}>{errorMessage}</Text>
@@ -68,24 +71,24 @@ const SignInScreen = () => {
           <Card.Actions>
             <Button
               style={styles.button}
-              theme={{ colors: { primary: colors.accent } }}
+             
               onPress={handleSignIn}
             >
               Sign In
             </Button>
           </Card.Actions>
           <Card.Actions>
-            <Text style={styles.label}>Don't have an account? </Text>
+            <Text style={styles.label}>Have an account? </Text>
             <Button
               style={styles.signUp}
-              onPress={navigateToSignUp}
+              onPress={navigateToSignUp }
             >
               Sign Up
             </Button>
           </Card.Actions>
         </Card.Content>
       </Card>
-    </View>
+   </View>
   );
 };
 

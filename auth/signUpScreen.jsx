@@ -38,14 +38,14 @@ const SignUpScreen = () => {
   };
   
   const navigateToSignIn = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate('Sign In');
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
   return (
-    <View style={styles.card}>
+    <View style={styles.card} >
       <Card style={styles.container}>
         <Card.Content>
           <Card.Cover source={require('../assets/images/logo.png')} resizeMode="stretch" />
@@ -94,6 +94,7 @@ const SignUpScreen = () => {
         </Card.Content>
       </Card>
     </View>
+
   );
 };
 

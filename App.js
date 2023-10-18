@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomePage from './screens/HomePage';
-import TaskPage from './screens/TaskPage';
+
+import Screen from './screens/screen';
 import SignUpScreen from './auth/signUpScreen';
 import SignInScreen from './auth/signInScreen';
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import Firebase Auth functions
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -35,17 +35,23 @@ const App = () => {
   return (
     <PaperProvider>
       <NavigationContainer>
-        {user ? (
-          <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="Task" component={TaskPage} />
-          </Tab.Navigator>
-        ) : (
-          <Stack.Navigator>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Navigator 
+        screenOptions={{ headerStyle: { backgroundColor: 'orange' },
+         headerTitleStyle: { paddingLeft: 15 , color: '#fff'} }}
+        
+        >
+          { user ? (
+            <Stack.Screen name="Screen" component={Screen} 
+              options={{ headerShown: false }}
+            />
+          ) : (
+            <>
+              <Stack.Screen name="Sign In" component={SignInScreen} />
+              <Stack.Screen name="SignUp" component={SignUpScreen} />
+            </>
+          )}
           </Stack.Navigator>
-        )}
+       
       </NavigationContainer>
     </PaperProvider>
   );
