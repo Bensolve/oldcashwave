@@ -1,21 +1,45 @@
-import { Button, Card, TextInput, useTheme, IconButton } from 'react-native-paper';
-import { View, Text } from 'react-native';
-import * as React from 'react';
+import { SafeAreaView, View, TouchableOpacity, Text, TextInput, Image } from 'react-native';
 import { styles } from './Sign';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword, AuthErrorCodes } from 'firebase/auth';
 import { auth } from '../firebaseConfig'; // Adjust the import path based on your project structure
+import { useState } from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+
 
 
 const SignUpScreen = () => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState(null);
+  const [email, setEmail] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  // const [selectedCountryCode, setSelectedCountryCode] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  // const [countryCode, setCountryCode] = useState('+233');
+  const [selectedCountry, setSelectedCountry] =
+    useState(null);
+  const [countryPickerVisible, setCountryPickerVisible] =
+    useState(false);
 
 
-  const { colors } = useTheme();
+
+  const toggleCountryPicker = () => {
+    setCountryPickerVisible(!countryPickerVisible);
+  };
+
+
+
+
   const navigation = useNavigation();
+
+  const handlePhoneNumberChange = (number) => {
+    // If the dial code is removed, clear the phone number.
+    setPhoneNumber(number);
+  };
 
 
 
@@ -36,64 +60,169 @@ const SignUpScreen = () => {
       }
     }
   };
-  
+
   const navigateToSignIn = () => {
-    navigation.navigate('Sign In');
+    navigation.navigate('SignIn');
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+  const textStyle = {
+    color: '#fff',
+
+
+  };
+  const textProps = {
+    keyboardType: 'numeric',
+    autoCapitalize: 'none',
+
+  };
   return (
-    <View style={styles.card} >
-      <Card style={styles.container}>
-        <Card.Content>
-          <Card.Cover source={require('../assets/images/logo.png')} resizeMode="stretch" />
-          <Card.Title>Sign Up</Card.Title>
-          <Card style={styles.Inputs}>
-            <TextInput
-              label="Email"
-              style={styles.email}
-              theme={{ colors: { primary: colors.primary } }}
-              onChangeText={(text) => setEmail(text)}
+
+    <SafeAreaView style={styles.card}>
+      <KeyboardAwareScrollView
+        resetScrollToCoords={{ x: 1, y: 0 }}
+        contentContainerStyle={styles.container}
+        scrollEnabled={true}
+      >
+
+        <View style={styles.header}>
+          <View style={styles.headerImg}>
+            <Image
+              source={require('../assets/images/logo1.png')}
+              style={styles.logo}
+
             />
-            <TextInput
-              style={styles.password}
-              label="Password"
-              secureTextEntry={!passwordVisible}
-              right={<TextInput.Icon icon = {passwordVisible ? icon='eye' : icon='eye-off'}
-              onPress = {togglePasswordVisibility}  
-             />}
-              theme={{ colors: { primary: colors.primary } }}
-              onChangeText={(text) => setPassword(text)}
-              
-            />
-     
-          </Card>
-          {errorMessage && (
-            <Text style={styles.errorText}>{errorMessage}</Text>
-          )}
-          <Card.Actions>
-            <Button
-              style={styles.button}
-              theme={{ colors: { primary: colors.accent } }}
-              onPress={handleSignUp}
-            >
-              Sign Up
-            </Button>
-          </Card.Actions>
-          <Card.Actions>
-            <Text style={styles.label}>Have an account? </Text>
-            <Button
-              style={styles.signUp}
-              onPress={navigateToSignIn}
-            >
-              Sign In
-            </Button>
-          </Card.Actions>
-        </Card.Content>
-      </Card>
-    </View>
+            <View style={styles.title}>
+              <Text style={styles.headtitle}>Sign Up</Text>
+            </View>
+
+          </View>
+        </View>
+          <View style={styles.up}>
+
+
+           
+
+            <View style={styles.upform}>
+
+              <View style={styles.inputView}>
+                <TextInput
+
+                  style={styles.emailinputText}
+                  placeholder="Enter your Email"
+                  placeholderTextColor="#eaeaea"
+                  onChangeText={text => setEmail({ email: text })}
+                />
+              </View>
+
+
+
+              <View style={styles.inputView}>
+
+                <View style={styles.roll}>
+                  <TextInput
+                    style={styles.passwordinputText}
+                    secureTextEntry={!passwordVisible}
+                    placeholder="Enter Your Password"
+                    placeholderTextColor="#eaeaea"
+                    onChangeText={text => setPassword({ password: text })}
+
+
+                  />
+                  <MaterialCommunityIcons
+                    name={passwordVisible ? 'eye' : 'eye-off'}
+                    style={styles.icon}
+                    onPress={togglePasswordVisibility}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.inputView}>
+
+                <View style={styles.roll}>
+                  <TextInput
+                    style={styles.passwordinputText}
+                    secureTextEntry={!passwordVisible}
+                    placeholder="Confirm Password"
+                    placeholderTextColor="#eaeaea"
+                    onChangeText={text => setConfirmPassword({ confirmPassword: text })}
+                  />
+                  <MaterialCommunityIcons
+                    name={passwordVisible ? 'eye' : 'eye-off'}
+                    style={styles.icon}
+                    onPress={togglePasswordVisibility}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.inputView}>
+                <TextInput
+                  label="Email Address"
+                  style={styles.emailinputText}
+                  placeholder="Invitation Code"
+                  placeholderTextColor="#eaeaea"
+                  onChangeText={text => setState({ email: text })}
+                />
+              </View>
+
+              <View style={styles.inputView}>
+
+                <TextInput
+
+                  style={styles.emailinputText}
+                  placeholder="Generate Unique code"
+                  placeholderTextColor="#eaeaea"
+                  onChangeText={text => setState({ email: text })}
+                />
+              </View>
+
+
+
+              <View>
+                <Text>I agree to terms and conditions</Text>
+              </View>
+
+              {errorMessage && (
+                <Text style={styles.errorText}>{errorMessage}</Text>
+              )}
+
+              <View>
+                <TouchableOpacity
+                  style={styles.atn}
+                  onPress={handleSignUp}>
+                  <View style={styles.btn}>
+                    <Text style={styles.btnText}>Sign Up</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <View>
+
+                  <TouchableOpacity
+                    style={{ marginTop: 'auto' }}
+                    onPress={navigateToSignIn}>
+                    <Text style={styles.formFooter}>
+                      Have an account?
+                      <Text style={{ color: 'orange' }}> Sign In</Text>
+                    </Text>
+
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+
+
+
+
+
+
+            </View>
+          </View>
+      </KeyboardAwareScrollView>
+
+    </SafeAreaView>
+
 
   );
 };

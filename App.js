@@ -36,8 +36,8 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator 
-        screenOptions={{ headerStyle: { backgroundColor: 'orange' },
-         headerTitleStyle: { paddingLeft: 15 , color: '#fff'} }}
+        screenOptions={{
+           headerShown: false, }}
         
         >
           { user ? (
@@ -46,7 +46,7 @@ const App = () => {
             />
           ) : (
             <>
-              <Stack.Screen name="Sign In" component={SignInScreen} />
+              <Stack.Screen name="SignIn" component={SignInScreen} />
               <Stack.Screen name="SignUp" component={SignUpScreen} />
             </>
           )}
