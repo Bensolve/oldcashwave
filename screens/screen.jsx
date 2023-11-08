@@ -8,12 +8,18 @@ const Tab = createBottomTabNavigator();
 
 const Screen = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+        
+        >
             <Tab.Screen name="Home" component={HomePage} 
-                
+                options={{ headerStyle:{backgroundColor : "black"}, headerTitle: "", headerRight:  }}
             />
-            <Tab.Screen name="Task" component={TaskPage} />
-            <Tab.Screen name="Chatbot" component={ChatBot} />
+            <Tab.Screen name="Task" component={TaskPage} 
+                 options={{ headerStyle:{backgroundColor : "black"}, headerTitle: "Select Task And WIn" ,   headerTitleStyle: { color: "orange" }, }}
+            />
+            <Tab.Screen name="Chatbot" component={ChatBot}
+                 options={{ headerStyle:{backgroundColor : "black"}, headerTitle: "" }}
+            />
         </Tab.Navigator>
     );
 };

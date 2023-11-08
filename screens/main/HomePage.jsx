@@ -1,33 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, FlatList } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import Profileheader from '../../components/Home/profileheader';
+import ImageSlider from '../../components/Home/ImageSlider';
+import PopularTask from '../../components/Home/popularTask';
 
 const HomePage = () => {
-  const recentItems = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' },
-  ];
-
   const [currentUser, setCurrentUser] = useState(null);
   const navigation = useNavigation();
 
   useEffect(() => {
-    const auth = getAuth(); // Get the Firebase Auth object
+    const auth = getAuth();
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in
         setCurrentUser(user);
       } else {
-        // No user is signed in
         setCurrentUser(null);
       }
     });
 
     return () => {
-      // Unsubscribe from the Firebase observer when the component unmounts
       unsubscribe();
     };
   }, []);
@@ -36,32 +30,28 @@ const HomePage = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        // Successfully signed out
-        navigation.navigate('SignIn'); // Navigate back to the sign-in page
+        navigation.navigate('SignIn');
       })
       .catch((error) => {
-        // Handle sign-out error
         console.error('Error signing out:', error);
       });
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 24 }}>
-        {currentUser ? `Hello, ${currentUser.email || 'User'}` : 'Welcome to my app!'}
-      </Text>
-
-      <FlatList
-        data={recentItems}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
-      />
-
-      <Button title="Search" onPress={() => { /* Redirect to the search page */ }} />
-      {currentUser && (
-        <Button title="Sign Out" onPress={handleSignOut} />
-      )}
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Profileheader />
+      <ImageSlider />
+      <PopularTask/>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+    marginTop: -30
+  },
+});
 
 export default HomePage;
