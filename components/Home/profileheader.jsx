@@ -48,11 +48,10 @@ export default function Profileheader() {
 
 const styles = StyleSheet.create({
   container: {
+    // marginTop: 10,
     padding: 24,
-    marginBottom: -50,
-    marginTop:87
-   
-  },
+    marginBottom: -45,
+    },
   header: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -1,26 +1,33 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import HomePage from './main/HomePage';
-// import TaskPage from './main/TaskPage';
+import { StatusBar } from 'expo-status-bar';
+import {View} from 'react-native';
 import HomePage from './main/HomePage';
 import TaskPage from './main/TaskPage';
 import ChatBot from './main/ChatBot';
 const Tab = createBottomTabNavigator();
 
+
 const Screen = () => {
     return (
+        <View style={{flex:1}}>
+        {/* <StatusBar barStyle="dark-content" backgroundColor="#000"   /> */}
+
         <Tab.Navigator
+            screenOptions={{headerShown:false, headerStyle:{backgroundColor:"grey"}}}
         
         >
             <Tab.Screen name="Home" component={HomePage} 
-                options={{ headerStyle:{backgroundColor : "black"}, headerTitle: "", headerRight:  }}
+                options={{  headerTitle: "",}}
             />
             <Tab.Screen name="Task" component={TaskPage} 
-                 options={{ headerStyle:{backgroundColor : "black"}, headerTitle: "Select Task And WIn" ,   headerTitleStyle: { color: "orange" }, }}
             />
+                        
             <Tab.Screen name="Chatbot" component={ChatBot}
-                 options={{ headerStyle:{backgroundColor : "black"}, headerTitle: "" }}
+                 options={{  headerTitle: "Bot Cashwave",}}
             />
         </Tab.Navigator>
+
+        </View>
     );
 };
 

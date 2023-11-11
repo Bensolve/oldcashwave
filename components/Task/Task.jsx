@@ -108,7 +108,9 @@ export default function Task() {
 const styles = StyleSheet.create({
     container: {
     
-      flex:1
+      flex:1,
+      marginTop: 12
+      
      
     },
     scrollContainer: {
@@ -119,6 +121,7 @@ const styles = StyleSheet.create({
       fontSize: 26,
       fontWeight: '600',
       color: 'orange',
+      textAlign: "center"
     
     },
     card: {

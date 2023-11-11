@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
+import {SafeAreaView,StyleSheet } from 'react-native'
+import Chat from '../../components/Chat/Chat'
 import React from 'react'
 
 const ChatBot = () => {
   return (
-    <View>
-      <Text>ChatBot</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+    <Chat/>
+  </SafeAreaView>
   )
 }
 
 export default ChatBot
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});

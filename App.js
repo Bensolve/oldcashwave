@@ -42,7 +42,7 @@ const App = () => {
         >
           { user ? (
             <Stack.Screen name="Screen" component={Screen} 
-              options={{ headerShown: false }}
+           
             />
           ) : (
             <>
